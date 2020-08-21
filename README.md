@@ -1,6 +1,7 @@
 # mi
 
 > A Vue.js project
+> 主要使用vant UI框架
 
 ## Build Setup
 
