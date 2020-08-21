@@ -3,7 +3,7 @@
 > A Vue.js project
 ## ui 框架
 ```
-# vant UI 
+ vant UI 
 
 ```
 ## Build Setup
