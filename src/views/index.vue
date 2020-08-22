@@ -1,7 +1,7 @@
 <template>
   <div class="container_index">
     <!-- header -->
-    <header>
+    <header v-if="activeFooter==0">
       <div class="top">
         <div>
           <img class="logo" src="../assets/index/logo.png" alt />
@@ -29,31 +29,42 @@
       >
         <van-tab v-for="item in topTabs" :title="item.tab" :key="item.id">
           <!-- 显示内容 tab content -->
-          <recommend v-if="activeHeader==0"></recommend>
+          <recommend></recommend>
         </van-tab>
       </van-tabs>
     </header>
+    <cata v-if="activeFooter==1"></cata>
+    <cart v-if="activeFooter==2"></cart>
+    <my v-if="activeFooter==3"></my>
     <!-- footer -->
-    <van-tabbar
-      v-model="activeFooter"
-      active-color="#ff691b"
-      inactive-color="#5f5f5f"
-      @change="changeFooter"
-      style="width:100%;height:1.04rem; box-shadow: 0 3px 14px 2px rgba(0, 0, 0, 0.12);"
-    >
-      <van-tabbar-item icon="home-o">首页</van-tabbar-item>
-      <van-tabbar-item icon="apps-o">分类</van-tabbar-item>
-      <van-tabbar-item icon="shopping-cart-o">购物车</van-tabbar-item>
-      <van-tabbar-item icon="contact">我的</van-tabbar-item>
-    </van-tabbar>
+    <div class="footer">
+      <van-tabbar
+        v-model="activeFooter"
+        active-color="#ff691b"
+        inactive-color="#5f5f5f"
+        @change="changeFooter"
+        style="width:7.5rem;height:1.04rem;box-shadow: 0 3px 14px 2px rgba(0, 0, 0, 0.12);"
+      >
+        <van-tabbar-item icon="home-o">首页</van-tabbar-item>
+        <van-tabbar-item icon="apps-o">分类</van-tabbar-item>
+        <van-tabbar-item icon="shopping-cart-o">购物车</van-tabbar-item>
+        <van-tabbar-item icon="contact">我的</van-tabbar-item>
+      </van-tabbar>
+    </div>
   </div>
 </template>
 
 <script>
 import recommend from "./recommend";
+import cata from "./cata";
+import cart from "./cart";
+import my from "./my";
 export default {
   components: {
     recommend,
+    cata,
+    cart,
+    my,
   },
   data() {
     return {
@@ -95,18 +106,18 @@ export default {
   created() {},
   methods: {
     changeFooter() {
-      console.log();
-      if (this.activeFooter == 0 && this.$route.path !== "/index") {
-        this.$router.push("/index");
-      } else if (this.activeFooter == 1) {
-        console.log("分类");
-      }
+      console.log(this.activeFooter);
     },
   },
 };
 </script>
 
 <style scoped>
+.container_index {
+  width: 7.5rem;
+  height: auto;
+  position: relative;
+}
 header {
   width: 100%;
   height: 1.41rem;
@@ -125,5 +136,14 @@ header {
 .logo {
   width: 0.48rem;
   height: 0.32rem;
+}
+.footer {
+  width: 7.5rem;
+  height: 1.04rem;
+  margin: 0 auto;
+  position: fixed;
+  left: 50%;
+  transform: translate(-50%, 0);
+  bottom: 0;
 }
 </style>

@@ -139,7 +139,6 @@
     </div>
     <div class="divider" style="background:#fff;"></div>
 
-    
     <!-- about MI -->
     <div class="about">
       <img
