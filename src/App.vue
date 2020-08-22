@@ -42,4 +42,23 @@ export default {
   border: 1px solid #e5e5e5;
   background-color: #fff;
 }
+/* cata */
+.van-sidebar-item--select::before {
+  background-color: transparent;
+}
+.van-sidebar {
+  width: 1.9rem;
+  white-space: nowrap;
+}
+.van-sidebar-item__text {
+  font-size: 0.24rem;
+  height: 0.4rem;
+}
+.van-sidebar-item {
+  background-color: #fff;
+}
+.van-nav-bar__title {
+  font-size: 0.3rem;
+  color: rgb(102, 102, 102);
+}
 </style>
