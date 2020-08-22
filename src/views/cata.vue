@@ -64,11 +64,65 @@
                 <div>
                   <img
                     style="width:1rem;height:1rem;"
+                    src="//cdn.cnbj1.fds.api.mi-img.com/mi-mall/ce7aaeec82e51a44790959295183f669.png?thumb=1&w=120&h=120"
+                    alt
+                  />
+                </div>
+                <span>充电器</span>
+              </div>
+            </div>
+          </div>
+          <!-- Redmi手机 -->
+          <div class="list">
+            <img
+              class="top_pic"
+              src="//cdn.cnbj1.fds.api.mi-img.com/mi-mall/9da143d6e1bbce78cda92d4be76bf4e5.jpg?f=webp&w=750&h=300&bg=FFFFFF"
+              alt
+            />
+            <div class="cata_title">
+              <span>Redmi红米 K系列</span>
+            </div>
+            <div class="box">
+              <div style="clear:both;"></div>
+              <div class="product" v-for="(item,index) in 5" :key="index">
+                <div>
+                  <img
+                    style="width:1rem;height:1rem;"
                     src="//cdn.cnbj1.fds.api.mi-img.com/mi-mall/2a47c566e14b2da1a6cc0780060a59d0.png?thumb=1&w=120&h=120"
                     alt
                   />
                 </div>
                 <span>小米10 至尊版</span>
+              </div>
+            </div>
+            <div class="cata_title">
+              <span>小米MIX系列</span>
+            </div>
+            <div class="box">
+              <div class="product" v-for="(item,index) in 2" :key="index">
+                <div>
+                  <img
+                    style="width:1rem;height:1rem;"
+                    src="//cdn.cnbj1.fds.api.mi-img.com/mi-mall/266ad6dd5146deaf3ae3602a89e7a217.png?thumb=1&w=120&h=120"
+                    alt
+                  />
+                </div>
+                <span>小米MIX Alpha</span>
+              </div>
+            </div>
+            <div class="cata_title">
+              <span>小米手机配件</span>
+            </div>
+            <div class="box">
+              <div class="product" v-for="(item,index) in 5" :key="index">
+                <div>
+                  <img
+                    style="width:1rem;height:1rem;"
+                    src="//cdn.cnbj1.fds.api.mi-img.com/mi-mall/ce7aaeec82e51a44790959295183f669.png?thumb=1&w=120&h=120"
+                    alt
+                  />
+                </div>
+                <span>充电器</span>
               </div>
             </div>
           </div>
@@ -136,6 +190,7 @@ export default {
   overflow-y: auto;
   position: relative;
 }
+
 .van-sidebar {
   width: 1.5rem;
   overflow-y: auto;
@@ -158,8 +213,6 @@ export default {
   width: 100%;
   height: auto;
   overflow-y: scroll;
-  /* overflow-y: auto;
-  -webkit-overflow-scrolling: touch; */
 }
 .top_pic {
   width: 5.5rem;
