@@ -1,7 +1,11 @@
 # mi
 
 > A Vue.js project
+## ui 框架
+```
+ vant UI 
 
+```
 ## Build Setup
 
 ``` bash
