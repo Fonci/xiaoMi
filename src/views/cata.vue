@@ -188,6 +188,7 @@ export default {
   height: auto;
   border-right: 1px solid #efefef;
   overflow-y: auto;
+  overflow-x: hidden;
   position: relative;
 }
 
@@ -213,6 +214,7 @@ export default {
   width: 100%;
   height: auto;
   overflow-y: scroll;
+  overflow-x: hidden;
 }
 .top_pic {
   width: 5.5rem;
