@@ -109,7 +109,12 @@
       <van-goods-action style="height:.96rem;">
         <van-goods-action-icon icon="wap-home-o" text="首页" @click="onClickIcon('home')" />
         <van-goods-action-icon icon="chat-o" text="客服" @click="onClickIcon('chat')" />
-        <van-goods-action-icon icon="cart-o" text="购物车" @click="onClickIcon('cart')" />
+        <van-goods-action-icon
+          icon="cart-o"
+          text="购物车"
+          :badge="cartBadge"
+          @click="onClickIcon('cart')"
+        />
         <van-goods-action-button
           type="warning"
           size="mini"
@@ -135,6 +140,8 @@
         @buy-clicked="onBuyClicked"
         @add-cart="onAddCartClicked"
       />
+      <!-- disable-stepper-input  数字框左右的数字框可以按 里面的数字不能手动输入 -->
+      <!-- <van-button block type="primary" @click="showBase = true"></van-button> -->
 
       <div style="width:4rem;height:4rem;"></div>
     </div>
@@ -307,6 +314,7 @@ export default {
       //     selectedNum: 3, //下面的数字选择框的数字即买了多少件
       //   },
       customSkuValidator: () => "请选择xxx!", //？？
+      cartBadge: "", //购物车badge
     };
   },
   methods: {
@@ -329,9 +337,12 @@ export default {
     },
     onAddCartClicked() {
       this.$toast({
+        type: "success",
         message: "加入购物车成功",
       });
       this.showCartBox = false;
+
+      this.cartBadge = parseInt(this.cartBadge + 1);
     },
     onPointClicked() {
       console.log("onPointClicked");

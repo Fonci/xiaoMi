@@ -120,4 +120,11 @@ export default {
   -webkit-justify-content: center;
   justify-content: center;
 }
+/* toast */
+.van-toast .van-icon{
+  color:white;
+}
+.van-toast__text{
+  white-space: nowrap;
+}
 </style>
