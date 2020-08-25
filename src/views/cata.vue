@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container cata_container">
     <!-- 导航栏 -->
     <van-nav-bar title="分类" style="background:rgb(242, 242, 242);height:0.5rem;" />
     <div class="content">
@@ -14,7 +14,6 @@
           />
         </van-sidebar>
       </div>
-
       <!-- 内容区域 -->
       <div class="main_box">
         <div class="main">
@@ -136,6 +135,7 @@
 export default {
   data() {
     return {
+      active: 0,
       activeKey: 0,
       navData: [
         "小米手机",

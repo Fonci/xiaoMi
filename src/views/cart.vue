@@ -38,6 +38,12 @@
         </div>
       </div>
     </div>
+    <van-submit-bar
+      style="height:1.04rem;"
+      :price="totalPrice"
+      button-text="提交订单"
+      @submit="onSubmit"
+    />
   </div>
 </template>
 <script>
@@ -80,6 +86,7 @@ export default {
         },
       ],
       itemValue: 1,
+      totalPrice: 0,
     };
   },
   mounted() {},
@@ -87,6 +94,9 @@ export default {
   methods: {
     golook() {
       this.$router.go(0);
+    },
+    onSubmit() {
+      console.log("提交订单");
     },
   },
 };

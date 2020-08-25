@@ -131,9 +131,10 @@ export default {
 /* 购物车 */
 .cart_container .van-nav-bar .van-icon {
   color: #939393;
-  font-size: .26rem;
+  font-size: 0.26rem;
 }
-.van-stepper__input{
-  font-size: .24rem;
+.van-stepper__input {
+  font-size: 0.24rem;
 }
+
 </style>
