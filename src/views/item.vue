@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container item_container">
     <div class="inner">
       <!-- header -->
       <header>
@@ -138,16 +138,11 @@
         :close-on-click-overlay="closeOnClickOverlay"
         :custom-sku-validator="customSkuValidator"
         @buy-clicked="onBuyClicked"
-        @add-cart="onAddCartClicked"
       />
-      <!-- disable-stepper-input  数字框左右的数字框可以按 里面的数字不能手动输入 -->
-      <!-- <van-button block type="primary" @click="showBase = true"></van-button> -->
-
       <div style="width:4rem;height:4rem;"></div>
     </div>
   </div>
 </template>
-
 <script>
 export default {
   data() {
@@ -209,7 +204,7 @@ export default {
             count: 2,
           },
         ],
-        // 所有 sku 的组合列表，如下是：白色1、白色2、天蓝色1、天蓝色2
+        // 所有 sku 的组合列表，每一个规格所对应的数量，如下是：白1，白2 ，白3，蓝1，蓝2，蓝3
         list: [
           {
             id: 2259,
@@ -319,7 +314,6 @@ export default {
   },
   methods: {
     onClickIcon(type) {
-      console.log(type);
       if (type == "home") {
         this.$router.push("/index");
         console.log("去首页");
@@ -341,7 +335,6 @@ export default {
         message: "加入购物车成功",
       });
       this.showCartBox = false;
-
       this.cartBadge = parseInt(this.cartBadge + 1);
     },
     onPointClicked() {

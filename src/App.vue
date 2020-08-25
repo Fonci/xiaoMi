@@ -61,12 +61,12 @@ export default {
   font-size: 0.3rem;
   color: rgb(102, 102, 102);
 }
-::-webkit-scrollbar {
+/* ::-webkit-scrollbar {
   width: 5px;
   height: 5px;
   border-radius: 5px;
   background-color: transparent;
-}
+} */
 /*定义滚动条轨道 内阴影+圆角*/
 /* ::-webkit-scrollbar-track {
   border-radius: 10px;
@@ -79,16 +79,17 @@ export default {
 /* -webkit-box-shadow: inset 0 0 6px rgba(122, 118, 118, 0.3); */
 /* background-color: rgba(0, 0, 0, 0.1); */
 /* } */
-.van-icon {
+
+/* 购物车面板 */
+.item_container .van-icon {
   font-size: 0.4rem;
   color: rgba(0, 0, 0, 0.54);
 }
-.van-goods-action-icon {
+.item_container .van-goods-action-icon {
   color: rgba(0, 0, 0, 0.54);
   font-size: 0.2rem;
   margin-left: 0.2rem;
 }
-/* 购物车面板 */
 .van-sku-container {
   min-height: 80%;
 }
@@ -121,10 +122,18 @@ export default {
   justify-content: center;
 }
 /* toast */
-.van-toast .van-icon{
-  color:white;
+.van-toast .van-icon {
+  color: white;
 }
-.van-toast__text{
+.van-toast__text {
   white-space: nowrap;
+}
+/* 购物车 */
+.cart_container .van-nav-bar .van-icon {
+  color: #939393;
+  font-size: .26rem;
+}
+.van-stepper__input{
+  font-size: .24rem;
 }
 </style>
