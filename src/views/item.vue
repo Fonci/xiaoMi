@@ -121,7 +121,7 @@
           @click="showCartCard"
         />
       </van-goods-action>
-      <van-sku
+      <!-- <van-sku
         v-model="showCartBox"
         :sku="sku"
         :goods="goods_info"
@@ -136,7 +136,8 @@
         :close-on-click-overlay="closeOnClickOverlay"
         :custom-sku-validator="customSkuValidator"
         @buy-clicked="onBuyClicked"
-      />
+        @add-cart="onAddCartClicked"
+      />-->
       <div style="width:100%;height:1.04rem;"></div>
     </div>
   </div>
@@ -150,8 +151,9 @@ export default {
 
       phone: [
         {
+          id: 1001,
           name: "小米10 Pro",
-          price: "4999",
+          price: 4999,
           info_title: "「分期最高享24期免息，购机享特惠加价购」",
           info_lists: [
             {
@@ -182,6 +184,7 @@ export default {
       ],
       tv: [
         {
+          id: 1002,
           name: "小米电视4X 43英寸",
           price: "999",
           info_title:
@@ -208,7 +211,8 @@ export default {
       ],
       pc: [
         {
-          name: "小米电视4X 43英寸",
+          id: 1003,
+          name: '小米笔记本15.6" MX110 独显版',
           price: "3899",
           info_title: "",
           info_lists: [
@@ -391,7 +395,6 @@ export default {
   created() {
     // 1001 phone 1002 tv   1003 pc
     this.itemId = window.sessionStorage.getItem("itemId");
-    console.log(this.itemId);
   },
   methods: {
     onChange(index) {
@@ -403,12 +406,23 @@ export default {
         console.log("去首页");
       } else if (type == "cart") {
         console.log("去购物车页面");
+        window.sessionStorage.setItem("goCart", "goCart");
+        this.$router.push("/index");
       } else {
         console.log("去客服页面");
       }
     },
+    // 加入购物车
     showCartCard() {
-      this.showCartBox = true;
+      this.$toast({
+        type: "success",
+        message: "加入购物车成功",
+      });
+      this.cartBadge = parseInt(this.cartBadge + 1);
+      let arr = [];
+      arr.push(this.itemId);
+      window.sessionStorage.setItem("addCartId", arr);
+      // this.showCartBox = true;
     },
     onBuyClicked() {
       console.log("buy");

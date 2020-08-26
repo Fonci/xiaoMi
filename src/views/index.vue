@@ -103,7 +103,12 @@ export default {
       ],
     };
   },
-  created() {},
+  created() {
+    let goCart = window.sessionStorage.getItem("goCart");
+    if (goCart) {
+      this.activeFooter = 2;
+    }
+  },
   methods: {
     changeFooter() {
       console.log(this.activeFooter);
