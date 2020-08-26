@@ -4,13 +4,16 @@
       <!-- header -->
       <header>
         <div>
-          <img class="header_icon" src="../assets/item/back.png" alt />
+          <img class="header_icon" src="../assets/item/back.png" alt @click="goback" />
           <img class="header_icon" src="../assets/item/share.png" alt />
         </div>
       </header>
       <!-- banner -->
       <van-swipe class="my-swipe" :autoplay="3000" :show-indicators="false">
-        <van-swipe-item v-for="(banner,index) in banners" :key="index">
+        <van-swipe-item
+          v-for="(banner,index) in itemId=='1001'?phone.banners:itemId=='1002'?tv.banners:pc.banners"
+          :key="index"
+        >
           <img :src="banner" alt style="width:100%;height:100%;" />
         </van-swipe-item>
       </van-swipe>
@@ -147,17 +150,29 @@
 export default {
   data() {
     return {
-      banners: [
-        "//cdn.cnbj1.fds.api.mi-img.com/mi-mall/3855dec8f7edd5dfe3aa3a4fe77a87dd.jpeg",
-        "//cdn.cnbj1.fds.api.mi-img.com/mi-mall/73687a4777c909d7460fda7fdb530dfc.jpg",
-        "//cdn.cnbj1.fds.api.mi-img.com/mi-mall/9c5b77e7780de29e42faf2ed4d936ac0.jpg",
-        "//cdn.cnbj1.fds.api.mi-img.com/mi-mall/799066a0d7b6e5070bf6f46cec9b130b.jpg",
-        "//cdn.cnbj1.fds.api.mi-img.com/mi-mall/8d53a1f12cf97f3fcf40b6cdfe311eb9.jpg",
-        "//cdn.cnbj1.fds.api.mi-img.com/mi-mall/d32265f5e3eb1496adf4eb53af802906.jpg",
-        "//cdn.cnbj1.fds.api.mi-img.com/mi-mall/bf0e626216800b6b47a6f0a0ed50e7f2.jpg",
-        "//cdn.cnbj1.fds.api.mi-img.com/mi-mall/51701b16df1b5f7638c33f5809f0c5ad.jpg",
-        "//cdn.cnbj1.fds.api.mi-img.com/mi-mall/b4ea51ccbdd6bdf3d23b4a8af0ed7edd.jpg",
-      ],
+      itemId: "", //商品id
+      phone: {
+        banners: [
+          "//cdn.cnbj1.fds.api.mi-img.com/mi-mall/3855dec8f7edd5dfe3aa3a4fe77a87dd.jpeg",
+          "//cdn.cnbj1.fds.api.mi-img.com/mi-mall/73687a4777c909d7460fda7fdb530dfc.jpg",
+          "//cdn.cnbj1.fds.api.mi-img.com/mi-mall/9c5b77e7780de29e42faf2ed4d936ac0.jpg",
+          "//cdn.cnbj1.fds.api.mi-img.com/mi-mall/799066a0d7b6e5070bf6f46cec9b130b.jpg",
+          "//cdn.cnbj1.fds.api.mi-img.com/mi-mall/8d53a1f12cf97f3fcf40b6cdfe311eb9.jpg",
+          "//cdn.cnbj1.fds.api.mi-img.com/mi-mall/d32265f5e3eb1496adf4eb53af802906.jpg",
+          "//cdn.cnbj1.fds.api.mi-img.com/mi-mall/bf0e626216800b6b47a6f0a0ed50e7f2.jpg",
+          "//cdn.cnbj1.fds.api.mi-img.com/mi-mall/51701b16df1b5f7638c33f5809f0c5ad.jpg",
+          "//cdn.cnbj1.fds.api.mi-img.com/mi-mall/b4ea51ccbdd6bdf3d23b4a8af0ed7edd.jpg",
+        ],
+      },
+      tv: {
+        banners: [
+          "//cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/531b65f7cb8e4a7586b2c337ef10b26e.jpg",
+          "//cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/759ade8991284b9fad5eda125cd7a53e.jpg",
+        ],
+      },
+      pc: {
+        banners: ["", "", "", "", "", "", "", ""],
+      },
       showCartBox: false,
       sku: {
         // 所有sku规格类目与其值的从属关系，比如商品有颜色和尺码两大类规格，颜色下面又有红色和蓝色两个规格值。
@@ -312,6 +327,11 @@ export default {
       cartBadge: "", //购物车badge
     };
   },
+  created() {
+    // 1001 phone 1002 tv   1003 pc
+    this.itemId = window.sessionStorage.getItem("itemId");
+    console.log(this.itemId);
+  },
   methods: {
     onClickIcon(type) {
       if (type == "home") {
@@ -339,6 +359,10 @@ export default {
     },
     onPointClicked() {
       console.log("onPointClicked");
+    },
+    // 返回
+    goback() {
+      this.$router.go(-1);
     },
   },
 };

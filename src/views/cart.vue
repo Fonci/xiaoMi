@@ -1,6 +1,11 @@
 <template>
   <div class="cart_container">
-    <van-nav-bar title="购物车" left-arrow style="background:rgb(242, 242, 242);height:0.5rem;" />
+    <van-nav-bar
+      title="购物车"
+      left-arrow
+      style="background:rgb(242, 242, 242);height:0.5rem;"
+      @click-left="onClickLeft"
+    />
     <div class="container cart_container">
       <div class="empty_pic" v-if="false">
         <img src="../assets/cart/empty_pic.png" alt @click="golook" />
@@ -41,7 +46,9 @@
         :price="totalPrice"
         button-text="提交订单"
         @submit="onSubmit"
-      />
+      >
+        <van-checkbox v-model="checkAll" checked-color="#07c160">全选</van-checkbox>
+      </van-submit-bar>
     </div>
   </div>
 </template>
@@ -50,7 +57,7 @@ export default {
   data() {
     return {
       checkedItem: true,
-
+      checkAll: true,
       cartLists: [
         {
           id: 1001,
@@ -102,11 +109,18 @@ export default {
   mounted() {},
   created() {},
   methods: {
+    // 到处逛逛 回首页
     golook() {
+      // 因为都在index页面所以只能重新刷新页面 从而回到首页
       this.$router.go(0);
     },
     onSubmit() {
       console.log("提交订单");
+    },
+    // 返回上一步
+    onClickLeft() {
+      // 因为都在index页面所以只能重新刷新页面 从而回到首页
+      this.$router.go(0);
     },
     toggleAll() {
       this.$refs.checkboxGroup.toggleAll();

@@ -51,20 +51,28 @@
     <div class="divider" style="background:#fff;"></div>
     <!-- phone lists -->
     <div class="lists">
-      <div class="one_list" v-for="(item,index) in 6" :key="index">
-        <div style="width:100%;height:2.8rem;">
-          <img src="../assets/recommend/phone.jpg" alt />
-        </div>
-        <div class="info_box">
-          <div class="name">小米10 Pro</div>
-          <div class="brief">骁龙865 / 50倍变焦</div>
-          <div class="price">
-            ￥4999
-            <span>起</span>
+      <div v-for="(i,index) in 6" :key="index">
+        <div
+          class="one_list"
+          v-for="(item,index) in phone"
+          :key="index"
+          @click="goItemDetail(item.id)"
+        >
+          <div style="width:100%;height:2.8rem;">
+            <img src="../assets/recommend/phone.jpg" alt />
           </div>
-          <div class="buybtn">立即购买</div>
+          <div class="info_box">
+            <div class="name">{{item.name}}</div>
+            <div class="brief">{{item.brief}}</div>
+            <div class="price">
+              ￥{{item.price}}
+              <span>起</span>
+            </div>
+            <div class="buybtn">立即购买</div>
+          </div>
         </div>
       </div>
+
       <div style="clear:both;"></div>
       <div class="more_product">更多小米手机产品 ></div>
     </div>
@@ -78,23 +86,31 @@
     </div>
     <div class="divider" style="background:#fff;"></div>
     <div class="lists">
-      <div class="one_list" v-for="(item,index) in 6" :key="index">
-        <div style="width:100%;height:2.8rem;">
-          <img src="../assets/recommend/tv.jpg" alt />
-        </div>
-        <div class="info_box">
-          <div class="name">小米电视4X 43英寸</div>
-          <div class="brief">FHD全高清屏，人工智能语音</div>
-          <div class="price">
-            ￥999
-            <span style="color:rgba(0,0,0,.54);font-size:.22rem;">
-              ￥
-              <s>1399</s>
-            </span>
+      <div v-for="(i,index) in 6" :key="index">
+        <div
+          class="one_list"
+          v-for="(item,index) in tv"
+          :key="index"
+          @click="goItemDetail(item.id)"
+        >
+          <div style="width:100%;height:2.8rem;">
+            <img src="../assets/recommend/tv.jpg" alt />
           </div>
-          <div class="buybtn">立即购买</div>
+          <div class="info_box">
+            <div class="name">{{item.name}}</div>
+            <div class="brief">{{item.brief}}</div>
+            <div class="price">
+              ￥{{item.price}}
+              <span style="color:rgba(0,0,0,.54);font-size:.22rem;">
+                ￥
+                <s>{{item.delPrice}}</s>
+              </span>
+            </div>
+            <div class="buybtn">立即购买</div>
+          </div>
         </div>
       </div>
+
       <div style="clear:both;"></div>
       <div class="more_product">更多小米电视产品 ></div>
     </div>
@@ -108,24 +124,32 @@
     </div>
     <div class="divider" style="background:#fff;"></div>
     <div class="lists">
-      <div class="one_list" v-for="(item,index) in 6" :key="index">
-        <div style="width:100%;height:2.8rem;">
-          <img src="../assets/recommend/pc.jpg" alt />
-        </div>
-        <div class="info_box">
-          <div class="name">Air 13.3" 2019款</div>
-          <div class="brief">新一代独立显卡</div>
-          <div class="price">
-            ￥5699
-            <span>起</span>
-            <span style="color:rgba(0,0,0,.54);font-size:.22rem;">
-              ￥
-              <s>5999</s>
-            </span>
+      <div v-for="(i,index) in 6" :key="index">
+        <div
+          class="one_list"
+          v-for="(item,index) in pc"
+          :key="index"
+          @click="goItemDetail(item.id)"
+        >
+          <div style="width:100%;height:2.8rem;">
+            <img :src="item.img" alt />
           </div>
-          <div class="buybtn">立即购买</div>
+          <div class="info_box">
+            <div class="name">{{item.name}}</div>
+            <div class="brief">{{item.brief}}</div>
+            <div class="price">
+              ￥{{item.price}}
+              <span>起</span>
+              <span style="color:rgba(0,0,0,.54);font-size:.22rem;">
+                ￥
+                <s>{{item.delPrice}}</s>
+              </span>
+            </div>
+            <div class="buybtn">立即购买</div>
+          </div>
         </div>
       </div>
+
       <div style="clear:both;"></div>
       <div class="more_product">更多小米笔记本产品 ></div>
     </div>
@@ -175,6 +199,35 @@ export default {
             "//cdn.cnbj1.fds.api.mi-img.com/mi-mall/e225635995c0d35fa858fc3c3afb4f91.jpg?thumb=1&w=720&h=360",
         },
       ],
+      phone: [
+        {
+          id: "1001",
+          name: "小米10 Pro",
+          brief: "骁龙865 / 50倍变焦",
+          price: "4999",
+        },
+      ],
+      tv: [
+        {
+          id: "1002",
+          name: "小米电视4X 43英寸",
+          brief: "FHD全高清屏，人工智能语音",
+          price: "999",
+          delPrice: "1399",
+        },
+      ],
+      pc: [
+        {
+          id: "1006",
+          name: '小米笔记本15.6" MX110 独显版',
+          brief: "全面均衡的国民轻薄本",
+          price: "3899",
+          delPrice: "4299",
+          img:
+            "//cdn.cnbj1.fds.api.mi-img.com/mi-mall/ff646eb3db372e455a7154331fa58d53.jpg?thumb=1&w=344&h=280",
+        },
+      ],
+      // 分类1
       cataImg1: [
         "//cdn.cnbj1.fds.api.mi-img.com/mi-mall/cb65daec7ef7b52cc785f88f78efba37.png?w=216&h=228&bg=FDF1E6",
         "//i8.mifile.cn/v1/a1/eb5024fe-dfe3-6e53-3e18-675bef5fa06e.webp?w=216&h=228&bg=EAF6FD",
@@ -182,6 +235,7 @@ export default {
         "//i8.mifile.cn/v1/a1/e8bc849a-0a3b-21a0-6810-7da3a3903dee.webp?w=216&h=228&bg=FDEFDE",
         "//i8.mifile.cn/v1/a1/7dbcbf87-6a58-adb6-2f3f-bb3dae3e9c80.webp?w=216&h=228&bg=E5F4FC",
       ],
+      // 分类2
       cataImg2: [
         "//cdn.cnbj1.fds.api.mi-img.com/mi-mall/64f3988b6216e4c1ab62a7f50df3e816.png?f=webp&w=216&h=228&bg=FFFFFF",
         "//cdn.cnbj1.fds.api.mi-img.com/mi-mall/9ea68dee2bfa0e55a82236b0d968e975.png?w=216&h=228&bg=FCEAEA",
@@ -190,6 +244,12 @@ export default {
         "//cdn.cnbj1.fds.api.mi-img.com/mi-mall/f11f9df6b0b0b428f8c8fc3267131830.png?w=216&h=228&bg=FDEDE8",
       ],
     };
+  },
+  methods: {
+    goItemDetail(id) {
+      window.sessionStorage.setItem("itemId", id);
+      this.$router.push("/item");
+    },
   },
 };
 </script>
@@ -262,9 +322,14 @@ img {
   height: 2.09rem;
 }
 .info_box .name {
+  width: 90%;
+  margin: 0 auto;
   margin-top: 0.2rem;
   font-size: 0.28rem;
   color: rgba(0, 0, 0, 0.87);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .info_box .brief {
   margin-top: 0.06rem;
