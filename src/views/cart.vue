@@ -8,7 +8,12 @@
       <!-- 购物车商品栏 -->
       <div class="cart_box" v-if="goods">
         <div class="box" v-for="(item,index) in cartLists" :key="index">
-          <van-checkbox v-model="checkedItem" checked-color="#07c160" style="margin-right:.2rem;"></van-checkbox>
+          <van-checkbox
+            v-model="item.checkedItem"
+            checked-color="#07c160"
+            style="margin-right:.2rem;"
+            @change="changeChecked(item.checkedItem,item.id)"
+          ></van-checkbox>
           <img style="width:1.78rem;height:1.78rem;border:1px solid #eee;" :src="item.url" alt />
           <div style="margin-left:1rem;width:55%">
             <div class="item_name">{{item.name}}</div>
@@ -53,7 +58,6 @@
 export default {
   data() {
     return {
-      checkedItem: true,
       checkAll: true,
       goods: [
         {
@@ -89,6 +93,7 @@ export default {
           url:
             "//cdn.cnbj1.fds.api.mi-img.com/mi-mall/3855dec8f7edd5dfe3aa3a4fe77a87dd.jpeg",
           itemValue: 5,
+          checkedItem: true,
         },
         {
           id: 1002,
@@ -97,6 +102,7 @@ export default {
           url:
             "//cdn.cnbj1.fds.api.mi-img.com/mi-mall/6b94af7cb690afa94d4e08cb0b247299.jpg",
           itemValue: 1,
+          checkedItem: true,
         },
       ],
       likeLists: [
@@ -128,6 +134,7 @@ export default {
       // itemValue: 1,
       totalPrice: 0,
       addCartId: [],
+      checkedNum: 0, //选中的数量
     };
   },
   mounted() {
@@ -137,13 +144,55 @@ export default {
     }
   },
   created() {
+    this.checkedNum = this.cartLists.length;
     // this.totalPrice 是以 分 为单位的 所以要 *100
-    for (var i in this.cartLists) {
-      this.totalPrice +=
-        this.cartLists[i].price * this.cartLists[i].itemValue * 100;
+    if (this.checkedNum == this.cartLists.length) {
+      // 全选
+      this.checkAll = true;
+      for (var i in this.cartLists) {
+        this.totalPrice +=
+          this.cartLists[i].price * this.cartLists[i].itemValue * 100;
+      }
+    } else {
+      this.checkAll = false;
     }
   },
   methods: {
+    changeChecked(val, id) {
+      this.totalPrice = 0;
+      for (var i in this.cartLists) {
+        if (id == this.cartLists[i].id) {
+          this.cartLists[i].checkedItem = val;
+          console.log(this.cartLists[i].checkedItem);
+        }
+      }
+
+      let num = 0;
+      this.cartLists.forEach((k, v) => {
+        if (k.checkedItem == true) {
+          num += 1;
+        }
+        this.checkedNum = num;
+      });
+      if (this.checkedNum == this.cartLists.length) {
+        console.log("全选");
+        // 全选
+        this.checkAll = true;
+        for (var i in this.cartLists) {
+          this.totalPrice +=
+            this.cartLists[i].price * this.cartLists[i].itemValue * 100;
+        }
+      } else {
+        console.log("未全选");
+        this.checkAll = false;
+        for (var i in this.cartLists) {
+          if (this.cartLists[i].checkedItem == true) {
+            this.totalPrice +=
+              this.cartLists[i].price * this.cartLists[i].itemValue * 100;
+          }
+        }
+      }
+    },
     // // 到处逛逛 回首页
     // golook() {
     //   // 因为都在index页面所以只能重新刷新页面 从而回到首页
