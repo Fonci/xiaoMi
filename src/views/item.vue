@@ -1,6 +1,10 @@
 <template>
   <div class="container item_container">
-    <div class="inner">
+    <div
+      class="inner"
+      v-for="(item,index) in itemId=='1001'?phone:itemId=='1002'?tv:pc"
+      :key="index"
+    >
       <!-- header -->
       <header>
         <div>
@@ -9,34 +13,26 @@
         </div>
       </header>
       <!-- banner -->
-      <van-swipe class="my-swipe" :autoplay="3000" :show-indicators="false">
-        <van-swipe-item
-          v-for="(banner,index) in itemId=='1001'?phone.banners:itemId=='1002'?tv.banners:pc.banners"
-          :key="index"
-        >
+      <van-swipe class="my-swipe" :autoplay="3000" :show-indicators="false" @change="onChange">
+        <van-swipe-item v-for="(banner,index) in item.banners" :key="index">
           <img :src="banner" alt style="width:100%;height:100%;" />
         </van-swipe-item>
+        <template #indicator>
+          <div class="custom-indicator">{{currentIndex+ 1 }} / {{item.banners.length}}</div>
+        </template>
       </van-swipe>
       <!-- info -->
       <div class="item_info">
         <div class="price">
           ￥
-          <span>4999</span>
+          <span>{{item.price}}</span>
         </div>
-        <div class="name">小米10 Pro</div>
+        <div class="name">{{item.name}}</div>
         <div class="info">
-          <div>「分期最高享24期免息，购机享特惠加价购」</div>
-          <div>
-            <img src="../assets/item/one.png" alt />
-            骁龙865旗舰平台，双模5G，用久了也不卡
-          </div>
-          <div>
-            <img src="../assets/item/two.png" alt />
-            骁龙865旗舰平台，双模5G，用久了也不卡
-          </div>
-          <div>
-            <img src="../assets/item/three.png" alt />
-            骁龙865旗舰平台，双模5G，用久了也不卡
+          <div v-if="item.info_title">{{item.info_title}}</div>
+          <div v-for="(info,index) in item.info_lists" :key="index">
+            <img :src="require(`../assets/item/`+info.iconPath+`.png`)" alt />
+            {{info.text}}
           </div>
         </div>
       </div>
@@ -53,7 +49,7 @@
         </div>
       </div>
       <!-- 排行榜 -->
-      <div class="rank flex_box">
+      <div class="rank flex_box" v-if="false">
         <div>
           <img
             style="width:1.25rem;height:.32rem;vertical-align:bottom;margin-right:.24rem;"
@@ -62,13 +58,12 @@
           />
           <span style="font-size:.24rem;">入选【小米手机热销榜】</span>
         </div>
-
         <img class="right_icon" src="../assets/item/right_icon.png" alt />
       </div>
       <div class="blank"></div>
       <!-- 用户所选产品信息 -->
       <div class="product_info">
-        <div class="chose_box" style=" ">
+        <div class="chose_box">
           <div style="margin-right:.3rem;padding-bottom:.28rem;">已选</div>
           <div
             class="flex_box"
@@ -142,7 +137,7 @@
         :custom-sku-validator="customSkuValidator"
         @buy-clicked="onBuyClicked"
       />
-      <div style="width:4rem;height:4rem;"></div>
+      <div style="width:100%;height:1.04rem;"></div>
     </div>
   </div>
 </template>
@@ -151,28 +146,94 @@ export default {
   data() {
     return {
       itemId: "", //商品id
-      phone: {
-        banners: [
-          "//cdn.cnbj1.fds.api.mi-img.com/mi-mall/3855dec8f7edd5dfe3aa3a4fe77a87dd.jpeg",
-          "//cdn.cnbj1.fds.api.mi-img.com/mi-mall/73687a4777c909d7460fda7fdb530dfc.jpg",
-          "//cdn.cnbj1.fds.api.mi-img.com/mi-mall/9c5b77e7780de29e42faf2ed4d936ac0.jpg",
-          "//cdn.cnbj1.fds.api.mi-img.com/mi-mall/799066a0d7b6e5070bf6f46cec9b130b.jpg",
-          "//cdn.cnbj1.fds.api.mi-img.com/mi-mall/8d53a1f12cf97f3fcf40b6cdfe311eb9.jpg",
-          "//cdn.cnbj1.fds.api.mi-img.com/mi-mall/d32265f5e3eb1496adf4eb53af802906.jpg",
-          "//cdn.cnbj1.fds.api.mi-img.com/mi-mall/bf0e626216800b6b47a6f0a0ed50e7f2.jpg",
-          "//cdn.cnbj1.fds.api.mi-img.com/mi-mall/51701b16df1b5f7638c33f5809f0c5ad.jpg",
-          "//cdn.cnbj1.fds.api.mi-img.com/mi-mall/b4ea51ccbdd6bdf3d23b4a8af0ed7edd.jpg",
-        ],
-      },
-      tv: {
-        banners: [
-          "//cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/531b65f7cb8e4a7586b2c337ef10b26e.jpg",
-          "//cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/759ade8991284b9fad5eda125cd7a53e.jpg",
-        ],
-      },
-      pc: {
-        banners: ["", "", "", "", "", "", "", ""],
-      },
+      currentIndex: 0,
+
+      phone: [
+        {
+          name: "小米10 Pro",
+          price: "4999",
+          info_title: "「分期最高享24期免息，购机享特惠加价购」",
+          info_lists: [
+            {
+              iconPath: "one",
+              text: "骁龙865旗舰平台，双模5G，用久了也不卡",
+            },
+            {
+              iconPath: "two",
+              text: "向往的生活同款手机，1亿像素8K电影相机",
+            },
+            {
+              iconPath: "three",
+              text: "对称式立体声，有声、有势，一听即知",
+            },
+          ],
+          banners: [
+            "//cdn.cnbj1.fds.api.mi-img.com/mi-mall/3855dec8f7edd5dfe3aa3a4fe77a87dd.jpeg",
+            "//cdn.cnbj1.fds.api.mi-img.com/mi-mall/73687a4777c909d7460fda7fdb530dfc.jpg",
+            "//cdn.cnbj1.fds.api.mi-img.com/mi-mall/9c5b77e7780de29e42faf2ed4d936ac0.jpg",
+            "//cdn.cnbj1.fds.api.mi-img.com/mi-mall/799066a0d7b6e5070bf6f46cec9b130b.jpg",
+            "//cdn.cnbj1.fds.api.mi-img.com/mi-mall/8d53a1f12cf97f3fcf40b6cdfe311eb9.jpg",
+            "//cdn.cnbj1.fds.api.mi-img.com/mi-mall/d32265f5e3eb1496adf4eb53af802906.jpg",
+            "//cdn.cnbj1.fds.api.mi-img.com/mi-mall/bf0e626216800b6b47a6f0a0ed50e7f2.jpg",
+            "//cdn.cnbj1.fds.api.mi-img.com/mi-mall/51701b16df1b5f7638c33f5809f0c5ad.jpg",
+            "//cdn.cnbj1.fds.api.mi-img.com/mi-mall/b4ea51ccbdd6bdf3d23b4a8af0ed7edd.jpg",
+          ],
+        },
+      ],
+      tv: [
+        {
+          name: "小米电视4X 43英寸",
+          price: "999",
+          info_title:
+            "「AI就趁现在！七夕特惠直降300元，8月28日恢复1199元！下单抽米家投影仪青春版！」",
+          info_lists: [
+            {
+              iconPath: "one",
+              text: "FHD全高清屏  画质更清晰震撼",
+            },
+            {
+              iconPath: "two",
+              text: "人工智能语音  语音搜片、控制智能设备",
+            },
+            {
+              iconPath: "three",
+              text: "高性能  64位四核处理器",
+            },
+          ],
+          banners: [
+            "//cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/531b65f7cb8e4a7586b2c337ef10b26e.jpg",
+            "//cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/759ade8991284b9fad5eda125cd7a53e.jpg",
+          ],
+        },
+      ],
+      pc: [
+        {
+          name: "小米电视4X 43英寸",
+          price: "3899",
+          info_title: "",
+          info_lists: [
+            {
+              iconPath: "one",
+              text: "四核i5处理器",
+            },
+            {
+              iconPath: "two",
+              text: "全新升级512G高速固态硬盘",
+            },
+            {
+              iconPath: "three",
+              text: "独立数字键盘",
+            },
+          ],
+          banners: [
+            "//cdn.cnbj1.fds.api.mi-img.com/mi-mall/6b94af7cb690afa94d4e08cb0b247299.jpg",
+            "//cdn.cnbj1.fds.api.mi-img.com/mi-mall/f9164f61d2c1b80632d2af354ad449ea.jpg",
+            "//cdn.cnbj1.fds.api.mi-img.com/mi-mall/7d14f261fe630e212f3550c854b88043.jpg",
+            "//cdn.cnbj1.fds.api.mi-img.com/mi-mall/ecf5fe54c834945fa45073b4099dd00c.jpg",
+            "//cdn.cnbj1.fds.api.mi-img.com/mi-mall/d6242798df13e1c21aef797f4b3dc74f.jpg",
+          ],
+        },
+      ],
       showCartBox: false,
       sku: {
         // 所有sku规格类目与其值的从属关系，比如商品有颜色和尺码两大类规格，颜色下面又有红色和蓝色两个规格值。
@@ -333,6 +394,9 @@ export default {
     console.log(this.itemId);
   },
   methods: {
+    onChange(index) {
+      this.currentIndex = index;
+    },
     onClickIcon(type) {
       if (type == "home") {
         this.$router.push("/index");
@@ -397,6 +461,16 @@ header > div {
   width: 7.2rem;
   height: 100%;
   margin-top: -0.5rem;
+}
+.custom-indicator {
+  position: absolute;
+  right: 0.32rem;
+  bottom: 0.32rem;
+  padding: 0.1rem 0.15rem;
+  font-size: 0.2rem;
+  border-radius: 0.12rem;
+  color: white;
+  background: rgba(0, 0, 0, 0.5);
 }
 .header_icon {
   width: 0.8rem;
