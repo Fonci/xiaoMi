@@ -133,8 +133,10 @@ export default {
   color: #939393;
   font-size: 0.26rem;
 }
-.van-stepper__input {
+.cart_container .van-stepper__input {
   font-size: 0.24rem;
 }
-
+.cart_container .van-checkbox {
+  overflow: unset;
+}
 </style>
