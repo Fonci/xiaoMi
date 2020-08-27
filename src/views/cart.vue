@@ -31,6 +31,7 @@
           </div>
         </div>
       </div>
+      <!-- 猜你喜欢 -->
       <div class="guess_like">
         <img src="../assets/cart/guess_like.jpg" alt />
         <div class="like_lists">
@@ -43,13 +44,14 @@
           </div>
         </div>
       </div>
+      <!-- 底部提交栏 -->
       <van-submit-bar
         style="height:.8rem;bottom:1.04rem;border-bottom:1px solid #eee;border-top:1px solid #eee;"
         :price="totalPrice"
         button-text="提交订单"
         @submit="onSubmit"
       >
-        <van-checkbox v-model="checkAll" checked-color="#07c160">全选</van-checkbox>
+        <van-checkbox v-model="checkAll" checked-color="#07c160" @click="checkAllSelect">全选</van-checkbox>
       </van-submit-bar>
     </div>
   </div>
@@ -145,11 +147,12 @@ export default {
   },
   created() {
     this.checkedNum = this.cartLists.length;
-    // this.totalPrice 是以 分 为单位的 所以要 *100
+
     if (this.checkedNum == this.cartLists.length) {
       // 全选
       this.checkAll = true;
       for (var i in this.cartLists) {
+        // this.totalPrice 是以 分 为单位的 所以要 *100
         this.totalPrice +=
           this.cartLists[i].price * this.cartLists[i].itemValue * 100;
       }
@@ -158,12 +161,12 @@ export default {
     }
   },
   methods: {
+    // 点击 商品栏 复选框
     changeChecked(val, id) {
       this.totalPrice = 0;
       for (var i in this.cartLists) {
         if (id == this.cartLists[i].id) {
           this.cartLists[i].checkedItem = val;
-          console.log(this.cartLists[i].checkedItem);
         }
       }
 
@@ -175,7 +178,6 @@ export default {
         this.checkedNum = num;
       });
       if (this.checkedNum == this.cartLists.length) {
-        console.log("全选");
         // 全选
         this.checkAll = true;
         for (var i in this.cartLists) {
@@ -183,7 +185,6 @@ export default {
             this.cartLists[i].price * this.cartLists[i].itemValue * 100;
         }
       } else {
-        console.log("未全选");
         this.checkAll = false;
         for (var i in this.cartLists) {
           if (this.cartLists[i].checkedItem == true) {
@@ -191,6 +192,20 @@ export default {
               this.cartLists[i].price * this.cartLists[i].itemValue * 100;
           }
         }
+      }
+    },
+    // 点击全选按钮
+    checkAllSelect() {
+      if (this.checkAll == true) {
+        this.cartLists.forEach((k, v) => {
+          k.checkedItem = true;
+          this.checkedNum = this.cartLists.length;
+        });
+      } else {
+        this.cartLists.forEach((k, v) => {
+          k.checkedItem = false;
+          this.checkedNum = 0;
+        });
       }
     },
     // // 到处逛逛 回首页
@@ -207,8 +222,11 @@ export default {
         }
       }
       for (var i in this.cartLists) {
-        this.totalPrice +=
-          this.cartLists[i].price * this.cartLists[i].itemValue * 100;
+        // 不管点击加减 必须选中之后才能计算总价
+        if (this.cartLists[i].checkedItem == true) {
+          this.totalPrice +=
+            this.cartLists[i].price * this.cartLists[i].itemValue * 100;
+        }
       }
     },
     // 减少
@@ -220,8 +238,11 @@ export default {
         }
       }
       for (var i in this.cartLists) {
-        this.totalPrice +=
-          this.cartLists[i].price * this.cartLists[i].itemValue * 100;
+        // 不管点击加减 必须选中之后才能计算总价
+        if (this.cartLists[i].checkedItem == true) {
+          this.totalPrice +=
+            this.cartLists[i].price * this.cartLists[i].itemValue * 100;
+        }
       }
     },
     onSubmit() {

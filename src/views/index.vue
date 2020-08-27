@@ -111,7 +111,7 @@ export default {
   },
   methods: {
     changeFooter() {
-      console.log(this.activeFooter);
+      // console.log(this.activeFooter);
     },
   },
 };

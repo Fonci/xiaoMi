@@ -139,4 +139,19 @@ export default {
 .cart_container .van-checkbox {
   overflow: unset;
 }
+.cart_container .van-submit-bar__bar {
+  height: 0.75rem;
+}
+.cart_container .van-submit-bar__button {
+  width: 1.8rem;
+  height: 0.6rem;
+}
+.cart_container .van-button--normal,
+.cart_container .van-submit-bar__price--integer,
+.cart_container .van-submit-bar__price {
+  font-size: 0.26rem;
+}
+.cart_container .van-submit-bar__text {
+  font-size: 0.2rem;
+}
 </style>
