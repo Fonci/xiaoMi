@@ -154,4 +154,15 @@ export default {
 .cart_container .van-submit-bar__text {
   font-size: 0.2rem;
 }
+/* cata */
+.cata_container .van-sidebar {
+  width: 1.8rem;
+  overflow-y: auto;
+  /* -webkit-overflow-scrolling: touch; */
+}
+.cata_container .active .van-sidebar-item__text {
+  font-size: 0.34rem;
+  color: #fb7d34;
+  height: 0.4rem;
+}
 </style>
