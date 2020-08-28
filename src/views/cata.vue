@@ -329,7 +329,7 @@ export default {
           ],
         },
       ],
-      offset: [0],//存放scroll的高度
+      offset: [0], //存放scroll的高度
     };
   },
   mounted() {
@@ -347,7 +347,7 @@ export default {
       // var mySort = this.offset;
       // this.$refs.mainRef.addEventListener("scroll", () => {
       //   var eScrollTop = this.$refs.mainRef.scrollTop;
-      //   console.log(eScrollTop);
+    
       //   for (var indexer = 1; indexer < mySort.length; indexer++) {
       //     if (eScrollTop > mySort[indexer]) {
       //       // this.activeKey = indexer;
@@ -360,7 +360,7 @@ export default {
   methods: {
     // 切换左侧菜单栏
     onChange(index) {
-      console.log(index, this.offset[index]);
+     
       var scrollTop = this.offset[index];
       this.$refs.mainRef.scrollTop = scrollTop + 10;
     },

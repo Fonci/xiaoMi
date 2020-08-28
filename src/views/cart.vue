@@ -45,12 +45,7 @@
         </div>
       </div>
       <!-- 底部提交栏 -->
-      <van-submit-bar
-        style="height:.8rem;bottom:1.04rem;border-bottom:1px solid #eee;border-top:1px solid #eee;"
-        :price="totalPrice"
-        button-text="提交订单"
-        @submit="onSubmit"
-      >
+      <van-submit-bar style :price="totalPrice" button-text="提交订单" @submit="onSubmit">
         <van-checkbox v-model="checkAll" checked-color="#07c160" @click="checkAllSelect">全选</van-checkbox>
       </van-submit-bar>
     </div>
@@ -327,5 +322,14 @@ img {
   width: 100%;
   height: 0.16rem;
   background-color: rgb(245, 245, 245);
+}
+.van-submit-bar {
+  width: 7.5rem;
+  height: 0.8rem;
+  bottom: 1.04rem;
+  border-bottom: 1px solid #eee;
+  border-top: 1px solid #eee;
+  left: 50%;
+  transform: translate(-50%);
 }
 </style>
