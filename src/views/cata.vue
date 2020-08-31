@@ -360,7 +360,6 @@ export default {
   methods: {
     // 切换左侧菜单栏
     onChange(index) {
-     
       var scrollTop = this.offset[index];
       this.$refs.mainRef.scrollTop = scrollTop + 10;
     },

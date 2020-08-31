@@ -1,6 +1,10 @@
 <template>
   <div class="container">
-    <header></header>
+    <header>
+      <div style="width:.8rem;height:.8rem;border-radius:50%;border:1px solid #eee;">
+        <img src alt />
+      </div>
+    </header>
   </div>
 </template>
 
